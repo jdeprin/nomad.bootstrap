@@ -1,17 +1,6 @@
 ---
 {% set agent = salt['grains.get']('ec2_info:Tags:salt-role', 'control.nomad.client') %}
 
-docker:
-  pkg.installed:
-    - name: docker
-
-docker-service:
-  service.running:
-    - name: docker
-    - enable: True
-    - watch:
-      - pkg: docker
-
 /etc/nomad/nomad.d:
   file.directory:
     - user: root

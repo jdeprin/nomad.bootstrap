@@ -13,7 +13,7 @@
       - group
       - mode
 
-{% if agent == 'control.nomad.master' %}
+{% if agent == 'control.nomad.server' %}
 /etc/consul/server.json:
   file.serialize:
     - user: root
@@ -22,14 +22,13 @@
     - dataset_pillar: "consul:config:server"
     - formatter: json
 
-/etc/consul/consul.d/web.json:
-  file.managed:
-    - source: salt://hashicorp/files/etc/consul/consul.d/web.json
+/etc/consul/consul.d/nomad.json:
+  file.serialize:
     - user: root
     - group: root
     - mode: 644
-    - require:
-      - file: /etc/consul/consul.d
+    - dataset_pillar: "consul:services:nomad"
+    - formatter: json
 
 /etc/rc.d/init.d/consul-server:
   file.managed:

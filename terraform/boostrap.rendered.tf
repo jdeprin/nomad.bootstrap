@@ -1,6 +1,12 @@
 data "template_file" "nomad_bootstrap" {
   template  = "${file("./bootstrap.tpl")}"
+
+  vars {
+    NOMAD_VERSION   = "0.7.1"
+    CONSUL_VERSION  = "1.0.5"
+  }
 }
+
 data "template_cloudinit_config" "nomad_config" {
   gzip          = true
   base64_encode = true

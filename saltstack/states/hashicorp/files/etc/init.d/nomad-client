@@ -10,7 +10,7 @@
 ### END INIT INFO
 
 dir="/etc/nomad/"
-cmd="nomad agent -config=/etc/nomad/client.hcl -config=/etc/nomad/nomad.d/"
+cmd="nomad agent -config=/etc/nomad/client.json -config=/etc/nomad/nomad.d/"
 user=""
 
 name=`basename $0`

@@ -13,15 +13,14 @@
       - group
       - mode
 
-{% if agent == 'control.nomad.master' %}
-/etc/nomad/server.hcl:
-  file.managed:
-    - source: salt://hashicorp/files/etc/nomad/server.hcl
+{% if agent == 'control.nomad.server' %}
+/etc/nomad/server.json:
+  file.serialize:
     - user: root
     - group: root
     - mode: 644
-    - require:
-      - file: /etc/nomad/nomad.d
+    - dataset_pillar: "nomad:config:server"
+    - formatter: json
 
 /etc/rc.d/init.d/nomad-server:
   file.managed:
@@ -32,16 +31,15 @@
 {% endif %}
 
 {% if agent == 'control.nomad.client' %}
-/etc/nomad/server.hcl:
-  file.managed:
-    - source: salt://hashicorp/files/etc/nomad/client.hcl
+/etc/nomad/client.json:
+  file.serialize:
     - user: root
     - group: root
     - mode: 644
-    - require:
-      - file: /etc/nomad/nomad.d
+    - dataset_pillar: "nomad:config:client"
+    - formatter: json
 
-/etc/rc.d/init.d/nomad-server:
+/etc/rc.d/init.d/nomad-client:
   file.managed:
     - source: salt://hashicorp/files/etc/init.d/nomad-client
     - user: root

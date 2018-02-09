@@ -23,6 +23,16 @@ resource "aws_security_group_rule" "ingr_4646_nomad_api" {
   security_group_id         = "${aws_security_group.intercluster_coms.id}"
   depends_on  = ["aws_security_group.intercluster_coms"]
 }
+resource "aws_security_group_rule" "ingr_4647_nomad_client" {
+  type            = "ingress"
+  from_port       = 4647
+  to_port         = 4647
+  protocol        = "tcp"
+  description     = "4647 - Nomad client port"
+  source_security_group_id  = "${aws_security_group.intercluster_coms.id}"
+  security_group_id         = "${aws_security_group.intercluster_coms.id}"
+  depends_on  = ["aws_security_group.intercluster_coms"]
+}
 resource "aws_security_group_rule" "ingr_8301_tcp_consul" {
   type            = "ingress"
   from_port       = 8301

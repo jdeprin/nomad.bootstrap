@@ -20,4 +20,12 @@ consul:
       bind_addr: {{ bind_addr }}
       node_name: {{ node_name }}
       retry_join:
-        - 10.33.36.206
+        - "provider=aws tag_key=salt-role tag_value=control.nomad.server"
+  services:
+    nomad:
+      service:
+        name: nomad
+        tags:
+          - "nomad"
+          - "nomad-server"
+        port: 4647

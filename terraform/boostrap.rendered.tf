@@ -4,6 +4,8 @@ data "template_file" "nomad_bootstrap" {
   vars {
     NOMAD_VERSION   = "0.7.1"
     CONSUL_VERSION  = "1.0.5"
+    SALT_HOST       = "${var.salt_host}"
+    SALT_FINGER     = "${var.salt_finger}"
   }
 }
 

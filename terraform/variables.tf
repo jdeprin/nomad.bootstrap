@@ -5,3 +5,6 @@ variable "ec2_base_ami"    { }
 variable "ec2_subnet"      { }
 variable "ec2_base_sg"     { }
 variable "ec2_key_name"    { }
+
+variable "salt_host"       { }
+variable "salt_finger"     { }

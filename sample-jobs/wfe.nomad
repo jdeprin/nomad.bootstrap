@@ -20,7 +20,7 @@ job "docs" {
   # placed on the same host.
   group "webs" {
     # Specify the number of these tasks we want.
-    count = 1
+    count = 3
 
     # Create an individual task (unit of work). This particular
     # task utilizes a Docker container to front a web application.
@@ -31,7 +31,7 @@ job "docs" {
 
       # Configuration is specific to each driver.
       config {
-        image = "hashicorp/web-frontend"
+        image = "hashicorp/web"
       }
 
       # The service block tells Nomad how to register this service
@@ -65,19 +65,12 @@ job "docs" {
         memory = 128 # MB
 
         network {
-          mbits = 100
+          mbits = 10
 
           # This requests a dynamic port named "http". This will
           # be something like "46283", but we refer to it via the
           # label "http".
           port "http" {}
-
-          # This requests a static port on 443 on the host. This
-          # will restrict this task to running once per host, since
-          # there is only one port 443 on each host.
-          port "https" {
-            static = 443
-          }
         }
       }
     }

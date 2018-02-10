@@ -2,8 +2,8 @@
 
 # Salt
 cd /tmp; curl -L https://bootstrap.saltstack.com -o bootstrap_salt.sh
-sh /tmp/bootstrap_salt.sh -X -A ccc-salt.hmhco.com
-echo "master_finger: 'b2:fe:91:88:0b:6c:02:03:95:ce:80:51:58:cc:68:2d:39:95:5a:64:2c:75:3d:1c:64:08:06:c6:b2:c4:89:ed'" > /etc/salt/minion.d/97-master_finger.conf
+sh /tmp/bootstrap_salt.sh -X -A ${SALT_HOST}
+echo "master_finger: '${SALT_FINGER}'" > /etc/salt/minion.d/97-master_finger.conf
 echo "minion_id_caching: False" > /etc/salt/minion.d/98-minion_id_caching.conf
 service salt-minion start
 

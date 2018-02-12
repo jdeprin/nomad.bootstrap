@@ -1,6 +1,6 @@
 # This declares a job named "docs". There can be exactly one
 # job declaration per job file.
-job "boostrap-wfe" {
+job "applications" {
   datacenters = ["aws-us-east-1"]
   type = "service"
 
@@ -9,18 +9,15 @@ job "boostrap-wfe" {
     max_parallel = 2
   }
 
-  group "webs" {
+  group "api" {
     count = 3
-    task "frontend" {
+    task "application02" {
       driver = "docker"
 
       config {
-        image = "hashicorp/http-echo"
-        args = [
-          "-text", "Hello World!",
-        ]
+        image = "jdeprin/nomad.app02:0.0.3"
         port_map = {
-          http = 5678
+          http = 7654
         }
       }
 
@@ -34,8 +31,8 @@ job "boostrap-wfe" {
 
         check {
           type     = "http"
-          path     = "/"
-          interval = "10s"
+          path     = "/health"
+          interval = "30s"
           timeout  = "2s"
         }
       }

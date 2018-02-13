@@ -1,6 +1,6 @@
 # This declares a job named "docs". There can be exactly one
 # job declaration per job file.
-job "applications" {
+job "application02" {
   datacenters = ["aws-us-east-1"]
   type = "service"
 
@@ -11,7 +11,7 @@ job "applications" {
 
   group "api" {
     count = 3
-    task "application02" {
+    task "wfe" {
       driver = "docker"
 
       config {

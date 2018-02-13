@@ -27,7 +27,14 @@
     - source: salt://hashicorp/files/etc/init.d/nomad-server
     - user: root
     - group: root
-    - mode: 755
+    - mode: 644
+
+nomad-server-service:
+  service.running:
+    - name: nomad-server
+    - enable: True
+    - require:
+      - file: /etc/rc.d/init.d/nomad-server
 {% endif %}
 
 {% if agent == 'control.nomad.client' %}
@@ -44,5 +51,12 @@
     - source: salt://hashicorp/files/etc/init.d/nomad-client
     - user: root
     - group: root
-    - mode: 755
+    - mode: 644
+
+nomad-client-service:
+  service.running:
+    - name: nomad-client
+    - enable: True
+    - require:
+      - file: /etc/rc.d/init.d/nomad-client
 {% endif %}

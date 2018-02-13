@@ -35,7 +35,14 @@
     - source: salt://hashicorp/files/etc/init.d/consul-server
     - user: root
     - group: root
-    - mode: 755
+    - mode: 644
+
+consul-server-service:
+  service.running:
+    - name: consul-server
+    - enable: True
+    - require:
+      - file: /etc/rc.d/init.d/consul-server
 {% endif %}
 
 {% if agent == 'control.nomad.client' %}
@@ -52,5 +59,12 @@
     - source: salt://hashicorp/files/etc/init.d/consul-client
     - user: root
     - group: root
-    - mode: 755
+    - mode: 644
+
+consul-client-service:
+  service.running:
+    - name: consul-client
+    - enable: True
+    - require:
+      - file: /etc/rc.d/init.d/consul-client
 {% endif %}
